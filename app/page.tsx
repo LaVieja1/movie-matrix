@@ -12,7 +12,7 @@ export default async function Home() {
   const movie = results[0];
 
   return (
-    <main>
+    <main className="min-h-screen">
       <Header />
       <div className="py-16 px-8">
         {/*
