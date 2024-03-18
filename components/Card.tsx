@@ -27,6 +27,7 @@ const Card = ({ image, title, year, rating }: CardProps) => {
           alt={title}
           className="aspect-square rounded-md"
           fill
+          sizes="(100vw - 2rem) 100vh"
         />
       </div>
     </div>
