@@ -31,7 +31,7 @@ export default async function Home({ searchParams }: HomeProps) {
           />
         ))}
       </div>
-      <Pages list={list} page={page} totalPages={totalPages} />
+      <Pages list={list} totalPages={totalPages} />
     </main>
   );
 }
