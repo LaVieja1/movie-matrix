@@ -9,7 +9,12 @@ interface ListItemProps {
 const ListItem = ({ param, title }: ListItemProps) => {
   return (
     <NavigationMenuLink>
-      <Link href={`/?list=${param}`}>{title}</Link>
+      <Link
+        className="hover:text-slate-300 transition"
+        href={`/?list=${param}`}
+      >
+        {title}
+      </Link>
     </NavigationMenuLink>
   );
 };

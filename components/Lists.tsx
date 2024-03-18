@@ -15,9 +15,11 @@ const Lists = () => {
           <NavigationMenuTrigger className="text-black">
             Listas
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="flex flex-col items-center gap-y-2 flex-1 text-sm px-8 py-4">
+          <NavigationMenuContent className="flex flex-col items-start gap-y-2 text-sm px-8 py-4">
             <ListItem title="Populares" param="popular" />
             <ListItem title="Mejor puntación" param="top_rated" />
+            <ListItem title="En cartelera" param="now_playing" />
+            <ListItem title="Proximamente" param="upcoming" />
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>

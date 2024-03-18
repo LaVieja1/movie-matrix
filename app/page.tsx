@@ -10,7 +10,7 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   const list = searchParams.list || "popular";
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${list}?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`,
+    `https://api.themoviedb.org/3/movie/${list}?api_key=${process.env.TMDB_API_KEY}&language=es&page=1&region=AR`,
     { next: { revalidate: 10000 } }
   );
   const data = await res.json();
