@@ -12,6 +12,7 @@ const Results = ({ results, type }: ResultsProps) => {
         <>
           {results.map((movie: any) => (
             <Card
+              id={movie.id}
               key={movie.id}
               image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               title={movie.title}
@@ -24,6 +25,7 @@ const Results = ({ results, type }: ResultsProps) => {
         <>
           {results.map((tv: any) => (
             <Card
+              id={tv.id}
               key={tv.id}
               image={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
               title={tv.name}
