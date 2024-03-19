@@ -13,7 +13,7 @@ interface PagesProps {
 const Pages = ({ list, totalPages }: PagesProps) => {
   const searchParams = useSearchParams();
   const activePage = searchParams.get("page");
-  const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <div className="mt-10 -mb-10 flex items-center justify-center gap-x-4">
