@@ -2,30 +2,39 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface CardProps {
+  id: number;
   image: string;
   title: string;
   year: number;
   rating: number;
 }
 
-const Card = ({ image, title, year, rating }: CardProps) => {
+const Card = ({ id, image, title, year, rating }: CardProps) => {
+  const router = useRouter();
+
   return (
-    <div className="bg-slate-800 space-y-1 flex flex-col items-center justify-evenly w-full p-2 text-white rounded-md text-center">
+    <div
+      onClick={() => router.push(`/${id}`)}
+      className="bg-slate-800 space-y-1 flex flex-col items-center justify-evenly w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer"
+    >
       <h1 className="text-xl">{title}</h1>
       <div className="w-full px-2 flex justify-center items-center text-sm gap-x-8">
-        <p className="text-slate-400">{year}</p>
+        <p className="text-slate-400">
+          {year.toLocaleString("es").slice(0, 4)}
+        </p>
         <div className="flex justify-center items-center gap-x-2">
           <Star size={18} />
           <p className="text-yellow-500">{rating.toPrecision(2)}</p>
         </div>
       </div>
-      <div className="relative aspect-square w-[95%]">
+      <div className="relative aspect-[2/3] w-[95%]">
         <Image
           src={image}
           alt={title}
-          className="aspect-square rounded-md"
+          className="aspect-[2/3] rounded-md"
           fill
           sizes="(100vw - 2rem) 100vh"
         />
