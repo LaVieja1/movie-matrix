@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface CardProps {
@@ -18,7 +17,7 @@ const Card = ({ id, image, title, year, rating }: CardProps) => {
   return (
     <div
       onClick={() => router.push(`/${id}`)}
-      className="bg-slate-800 space-y-1 flex flex-col items-center justify-evenly w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer"
+      className="bg-slate-800 space-y-1 flex flex-col items-center justify-evenly w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer max-h-[400px]"
     >
       <h1 className="text-xl">{title}</h1>
       <div className="w-full px-2 flex justify-center items-center text-sm gap-x-8">
@@ -26,7 +25,7 @@ const Card = ({ id, image, title, year, rating }: CardProps) => {
           {year.toLocaleString("es").slice(0, 4)}
         </p>
         <div className="flex justify-center items-center gap-x-2">
-          <Star size={18} />
+          ⭐️
           <p className="text-yellow-500">{rating.toPrecision(2)}</p>
         </div>
       </div>

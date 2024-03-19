@@ -1,5 +1,14 @@
 import Image from "next/image";
 
+import Card from "@/components/Card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 async function getMovie(id: string) {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=es`
@@ -16,25 +25,52 @@ async function getCast(id: string) {
   return data;
 }
 
+async function getImages(id: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_API_KEY}`
+  );
+  const data = await res.json();
+  return data;
+}
+
+async function getVideos(id: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.TMDB_API_KEY}&language=es-MX`
+  );
+  const data = await res.json();
+  return data;
+}
+
+async function getRecommendations(id: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.TMDB_API_KEY}&language=es`
+  );
+  const data = await res.json();
+  return data;
+}
+
 const Movie = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const movie = await getMovie(id);
+  const images = await getImages(id);
+  const videos = await getVideos(id);
   const cast = await getCast(id);
   const genres = movie.genres.map((genre: any) => genre.name);
+  const recommendations = await getRecommendations(id);
 
   if (!movie) {
     return <div>No se encontro la pelicula</div>;
   }
 
   return (
-    <main className="min-h-screen py-16 px-8 z-10 relative text-white">
+    <main className="min-h-screen py-4 px-8 z-10 relative text-white">
       <div
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.8)",
           backgroundImage:
             `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})` || "",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
         }}
         className="absolute inset-0 -z-10 brightness-[30%] backdrop-blur-sm"
       ></div>
@@ -46,17 +82,32 @@ const Movie = async ({ params }: { params: { id: string } }) => {
           <p className="ml-4">{movie.runtime} min</p>
           <p className="ml-4">⭐️ {movie.vote_average.toPrecision(2)} / 10</p>
         </div>
-        <div className="relative aspect-[2/3] w-[250px] mt-2">
-          <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            className="aspect-[1/1]"
-            fill
-            sizes="(100vw - 2rem) 100vh"
-          />
+        <div className="flex items-center justify-between">
+          <div className="relative aspect-[2/3] w-[300px] mt-2">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="aspect-[2/3]"
+              fill
+              sizes="(100vw - 2rem) 100vh"
+            />
+          </div>
+          {videos.results
+            .filter((v: any) => v.type === "Trailer")
+            .slice(0, 1)
+            .map((v: any) => (
+              <iframe
+                key={v.key}
+                className="w-[1000px] h-[450px] aspect-video"
+                src={`https://www.youtube.com/embed/${v.key}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ))}
         </div>
       </div>
-      <div className="mt-4 flex flex-col justify-center w-[70%]">
+      <div className="mt-4 flex flex-col justify-center w-[80%]">
         <div className="flex items-center gap-x-4 py-2">
           {genres.map((genre: string) => (
             <p key={genre} className="border px-2 py-1 rounded-md text-sm">
@@ -64,22 +115,28 @@ const Movie = async ({ params }: { params: { id: string } }) => {
             </p>
           ))}
         </div>
-        <p>{movie.overview}</p>
+        <p
+          className={`mt-4 ${
+            movie.overview.length > 300 ? "line-clamp-3" : ""
+          }`}
+        >
+          {movie.overview}
+        </p>
         <div className="flex flex-col justify-center">
-          <p className="border-t py-2">
+          <p className="border-t border-gray-600 py-2">
             <strong>Dirección: </strong>
             {cast.crew
               .filter((c: any) => c.job === "Director")
               .map((c: any) => c.name)}
           </p>
-          <p className="border-t py-2">
+          <p className="border-t border-gray-600 py-2">
             <strong>Guionistas: </strong>
             {cast.crew
               .filter((c: any) => c.department === "Writing")
               .map((c: any) => c.name)
               .join(",  ")}
           </p>
-          <p className="border-t py-2">
+          <p className="border-t border-gray-600 py-2">
             <strong>Reparto: </strong>
             {cast.cast
               .filter((c: any) => c.known_for_department === "Acting")
@@ -88,6 +145,67 @@ const Movie = async ({ params }: { params: { id: string } }) => {
               .join(",  ")}
             ...
           </p>
+        </div>
+      </div>
+      <div className="mt-24 flex items-center justify-between">
+        <div className="mx-auto">
+          <p className="text-3xl">Imagenes</p>
+          <Carousel className="w-[600px]">
+            <CarouselContent>
+              {images.backdrops.map((image: any) => (
+                <CarouselItem key={image.file_path}>
+                  <div className="relative aspect-video w-full">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
+                      alt={movie.title}
+                      fill
+                      sizes="(100vw - 2rem) 100vh"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="bg-black" />
+            <CarouselNext className="bg-black" />
+          </Carousel>
+        </div>
+        <div className="mx-auto">
+          <p className="text-3xl">Videos</p>
+          <Carousel className="w-[600px]">
+            <CarouselContent>
+              {videos.results
+                .filter((video: any) => video.type === "Trailer")
+                .map((video: any) => (
+                  <CarouselItem key={video.key}>
+                    <iframe
+                      width={"100%"}
+                      height="340px"
+                      src={`https://www.youtube.com/embed/${video.key}`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious className="bg-black" />
+            <CarouselNext className="bg-black" />
+          </Carousel>
+        </div>
+      </div>
+      <div className="my-8 flex flex-col items-center justify-center">
+        <h4 className="text-3xl pb-8">Recomendaciones</h4>
+        <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {recommendations.results.slice(0, 4).map((movie: any) => (
+            <Card
+              key={movie.id}
+              id={movie.id}
+              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              title={movie.title}
+              year={movie.release_date}
+              rating={movie.vote_average}
+            />
+          ))}
         </div>
       </div>
     </main>
