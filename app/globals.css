@@ -8,6 +8,10 @@ body,
   height: 100%;
 }
 
+body {
+  @apply bg-slate-900 text-slate-100;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

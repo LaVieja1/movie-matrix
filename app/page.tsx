@@ -46,10 +46,10 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="min-h-screen py-4 px-8">
       <div className="flex flex-col justify-center mb-4">
-        <h1 className="text-3xl">
+        <h1 className="text-3xl font-bold">
           {type === "movie" ? "Peliculas" : "Series"}
         </h1>
-        <p>{await renderList(list)}</p>
+        <p className="text-slate-500">{await renderList(list)}</p>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         <Results results={results} type={type} />

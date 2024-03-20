@@ -27,7 +27,7 @@ const Header = () => {
             onClick={() => setActive("movie")}
             className={`${active === "movie" ? "text-yellow-500" : ""}`}
           >
-            <Link href="?type=movie">Movie</Link>
+            <Link href="?type=movie">Películas</Link>
           </Button>
           <Button
             asChild
