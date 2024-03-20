@@ -72,11 +72,11 @@ const Movie = async ({ params }: { params: { id: string } }) => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
         }}
-        className="absolute inset-0 -z-10 brightness-[30%] backdrop-blur-sm"
+        className="absolute inset-0 -z-10 brightness-[15%] backdrop-blur-sm"
       ></div>
       <div className="flex flex-col justify-center">
         <h1 className="text-3xl">{movie.title}</h1>
-        <p>Título original: {movie.original_title}</p>
+        <p className="text-sm text-slate-400">{movie.original_title}</p>
         <div className="flex items-center">
           <p>{movie.release_date.slice(0, 4)}</p>
           <p className="ml-4">{movie.runtime} min</p>
@@ -107,7 +107,7 @@ const Movie = async ({ params }: { params: { id: string } }) => {
             ))}
         </div>
       </div>
-      <div className="mt-4 flex flex-col justify-center w-[80%]">
+      <div className="mt-4 flex flex-col justify-center w-[60%]">
         <div className="flex items-center gap-x-4 py-2">
           {genres.map((genre: string) => (
             <p key={genre} className="border px-2 py-1 rounded-md text-sm">
@@ -127,7 +127,8 @@ const Movie = async ({ params }: { params: { id: string } }) => {
             <strong>Dirección: </strong>
             {cast.crew
               .filter((c: any) => c.job === "Director")
-              .map((c: any) => c.name)}
+              .map((c: any) => c.name)
+              .join(",  ")}
           </p>
           <p className="border-t border-gray-600 py-2">
             <strong>Guionistas: </strong>
@@ -149,7 +150,7 @@ const Movie = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="mt-24 flex items-center justify-between">
         <div className="mx-auto">
-          <p className="text-3xl">Imagenes</p>
+          <p className="text-3xl pb-4">Imagenes</p>
           <Carousel className="w-[600px]">
             <CarouselContent>
               {images.backdrops.map((image: any) => (
@@ -170,7 +171,7 @@ const Movie = async ({ params }: { params: { id: string } }) => {
           </Carousel>
         </div>
         <div className="mx-auto">
-          <p className="text-3xl">Videos</p>
+          <p className="text-3xl pb-4">Videos</p>
           <Carousel className="w-[600px]">
             <CarouselContent>
               {videos.results
@@ -195,8 +196,8 @@ const Movie = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="my-8 flex flex-col items-center justify-center">
         <h4 className="text-3xl pb-8">Recomendaciones</h4>
-        <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {recommendations.results.slice(0, 4).map((movie: any) => (
+        <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {recommendations.results.slice(0, 5).map((movie: any) => (
             <Card
               key={movie.id}
               id={movie.id}
