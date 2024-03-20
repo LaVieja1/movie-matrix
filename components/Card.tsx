@@ -17,7 +17,6 @@ const Card = ({ id, image, title, year, rating }: CardProps) => {
   const searchParams = useSearchParams();
   const type = searchParams?.get("type") || "movie";
   const typePath = pathname?.split("/")[1];
-  console.log(type);
 
   const handleType = (id: number) => {
     if (typePath === "" && type === "movie") {

@@ -76,6 +76,14 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-500;
+}
+
 @layer base {
   * {
     @apply border-border;
