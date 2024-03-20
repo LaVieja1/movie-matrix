@@ -96,10 +96,10 @@ const Header = () => {
                   </Link>
                 </Button>
               </DropdownMenuItem>
-              <DropdownMenuItem className="relative">
-                <div className="hover:bg-slate-600 transition w-full text-center pb-40 px-64">
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center pb-44 px-64">
+                <Button>
                   <Lists />
-                </div>
+                </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -113,7 +113,9 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden md:flex items-center gap-x-6 ">
-          <Lists />
+          <Button>
+            <Lists />
+          </Button>
           <Button
             asChild
             className={`${type === "movie" ? "text-yellow-500" : ""}`}

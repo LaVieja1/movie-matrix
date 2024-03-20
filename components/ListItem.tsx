@@ -1,4 +1,6 @@
-import { NavigationMenuLink } from "./ui/navigation-menu";
+import Link from "next/link";
+
+import { DropdownMenuItem } from "./ui/dropdown-menu";
 
 interface ListItemProps {
   type: string;
@@ -8,12 +10,11 @@ interface ListItemProps {
 
 const ListItem = ({ param, title, type }: ListItemProps) => {
   return (
-    <NavigationMenuLink
-      href={`?type=${type}&list=${param}`}
-      className="w-full bg-slate-800 text-white text-center px-4 hover:bg-slate-600 transition"
-    >
-      {title}
-    </NavigationMenuLink>
+    <DropdownMenuItem className="w-full bg-slate-800 text-white px-4 hover:bg-slate-600 transition">
+      <Link href={`?type=${type}&list=${param}`} className="text-center w-full">
+        {title}
+      </Link>
+    </DropdownMenuItem>
   );
 };
 
