@@ -9,9 +9,10 @@ interface CardProps {
   title: string;
   year: number;
   rating: number;
+  mediaType?: string;
 }
 
-const Card = ({ id, image, title, year, rating }: CardProps) => {
+const Card = ({ id, image, title, year, rating, mediaType }: CardProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -24,9 +25,16 @@ const Card = ({ id, image, title, year, rating }: CardProps) => {
     } else if (typePath === "" && type === "tv") {
       router.push(`/tv/${id}`);
     }
+
     if (typePath === "movie") {
       router.push(`/movie/${id}`);
     } else if (typePath === "tv") {
+      router.push(`/tv/${id}`);
+    }
+
+    if (mediaType === "movie") {
+      router.push(`/movie/${id}`);
+    } else if (mediaType === "tv") {
       router.push(`/tv/${id}`);
     }
   };

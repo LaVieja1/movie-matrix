@@ -6,9 +6,28 @@ import { Input } from "./ui/input";
 import Lists from "./Lists";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [active, setActive] = useState("movie");
+  const router = useRouter();
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const searchTerm = e.currentTarget.value;
+      if (searchTerm) {
+        router.push(`/search/${searchTerm}`);
+      }
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const searchTerm = e.target.value;
+    if (searchTerm) {
+      router.push(`/search/${searchTerm}`);
+    }
+  };
 
   return (
     <header className="bg-slate-800 w-full">
@@ -37,7 +56,17 @@ const Header = () => {
             <Link href="?type=tv">TV</Link>
           </Button>
           <Lists />
-          <Input type="search" className="w-64" placeholder="Buscar..." />
+          <Input
+            id="search"
+            name="search"
+            type="search"
+            className="w-64 text-black"
+            placeholder="Buscar..."
+            maxLength={50}
+            minLength={2}
+            onChange={(e) => handleChange(e)}
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
         </div>
       </nav>
     </header>
