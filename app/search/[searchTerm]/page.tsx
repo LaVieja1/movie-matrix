@@ -15,8 +15,6 @@ const searchPage = async ({ params }: { params: { searchTerm: string } }) => {
     (result: any) => result.media_type === "movie" || result.media_type === "tv"
   );
 
-  console.log(results);
-
   return (
     <main className="min-h-screen py-4 px-8">
       <div className="flex flex-col justify-center mb-4">
