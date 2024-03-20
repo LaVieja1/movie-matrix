@@ -42,7 +42,7 @@ const Lists = () => {
                 <ListItem type="tv" title="En el aire" param="on_the_air" />
                 <ListItem
                   type="tv"
-                  title="Nuevo capitulo"
+                  title="Nuevo capítulo"
                   param="airing_today"
                 />
               </>

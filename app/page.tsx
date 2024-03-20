@@ -20,8 +20,37 @@ export default async function Home({ searchParams }: HomeProps) {
   const totalPages = data.total_pages;
   const results = data.results;
 
+  if (!results || results.length === 0) {
+    return <div>No se encontraron resultados</div>;
+  }
+
+  async function renderList(list: string) {
+    switch (list) {
+      case "popular":
+        return "Populares";
+      case "top_rated":
+        return "Mejor puntación";
+      case "now_playing":
+        return "En cartelera";
+      case "upcoming":
+        return "Proximamente";
+      case "on_the_air":
+        return "En el aire";
+      case "airing_today":
+        return "Nuevo capítulo";
+      default:
+        return "Populares";
+    }
+  }
+
   return (
-    <main className="min-h-screen py-16 px-8">
+    <main className="min-h-screen py-4 px-8">
+      <div className="flex flex-col justify-center mb-4">
+        <h1 className="text-3xl">
+          {type === "movie" ? "Peliculas" : "Series"}
+        </h1>
+        <p>{await renderList(list)}</p>
+      </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         <Results results={results} type={type} />
       </div>
