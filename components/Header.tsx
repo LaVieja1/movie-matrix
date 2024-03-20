@@ -7,6 +7,7 @@ import Lists from "./Lists";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Header = () => {
   const [active, setActive] = useState("movie");
@@ -32,7 +33,16 @@ const Header = () => {
   return (
     <header className="bg-slate-800 w-full">
       <nav className="flex items-center justify-between p-4 text-white text-xl">
-        <div className="flex items-center gap-x-6">
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width={50}
+          height={50}
+          className="mr-4 w-auto h-auto cursor-pointer"
+          priority
+          onClick={() => router.push("/")}
+        />
+        <div className="flex items-center gap-x-6 mr-auto">
           <Link className="hover:text-white/50 transition" href="/">
             Inicio
           </Link>
