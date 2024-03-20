@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { NavigationMenuLink } from "./ui/navigation-menu";
 
 interface ListItemProps {
@@ -9,13 +8,11 @@ interface ListItemProps {
 
 const ListItem = ({ param, title, type }: ListItemProps) => {
   return (
-    <NavigationMenuLink>
-      <Link
-        className="hover:text-slate-300 transition"
-        href={`?type=${type}&list=${param}`}
-      >
-        {title}
-      </Link>
+    <NavigationMenuLink
+      href={`?type=${type}&list=${param}`}
+      className="w-full bg-slate-800 text-white text-center px-4 hover:bg-slate-600 transition"
+    >
+      {title}
     </NavigationMenuLink>
   );
 };

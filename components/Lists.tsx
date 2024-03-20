@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import ListItem from "./ListItem";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,6 +7,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
+
+import ListItem from "./ListItem";
 
 const Lists = () => {
   const searchParams = useSearchParams();
@@ -19,7 +21,7 @@ const Lists = () => {
           <NavigationMenuTrigger className="text-black">
             Listas
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="flex flex-col items-start gap-y-2 text-sm px-8 py-4">
+          <NavigationMenuContent className="flex flex-col items-center gap-y-2 text-sm py-4 bg-slate-800">
             {type === "movie" ? (
               <>
                 <ListItem type="movie" title="Populares" param="popular" />

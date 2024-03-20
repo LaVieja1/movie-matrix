@@ -1,17 +1,27 @@
 "use client";
 
 import Link from "next/link";
-
-import { Input } from "./ui/input";
-import Lists from "./Lists";
-import { Button } from "./ui/button";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+
+import Lists from "./Lists";
+
 const Header = () => {
-  const [active, setActive] = useState("movie");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type") || "movie";
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -32,7 +42,7 @@ const Header = () => {
 
   return (
     <header className="bg-slate-800 w-full">
-      <nav className="flex items-center justify-between py-4 px-8 text-white text-xl">
+      <nav className="flex items-center justify-between py-2 px-8 text-white text-xl">
         <Image
           src="/logo.svg"
           alt="logo"
@@ -42,7 +52,59 @@ const Header = () => {
           priority
           onClick={() => router.push("/")}
         />
-        <div className="flex items-center gap-x-6 mr-auto">
+        <div className="md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Menu />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-slate-800 text-white flex flex-col items-center w-full px-4">
+              <DropdownMenuLabel>Menu</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center">
+                <Link
+                  className="hover:text-white/50 transition w-full"
+                  href="/"
+                >
+                  Inicio
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center">
+                <Link
+                  className="hover:text-white/50 transition w-full"
+                  href="/info"
+                >
+                  Info
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center ">
+                <Button
+                  asChild
+                  className={`${type === "movie" ? "text-yellow-500" : ""}`}
+                >
+                  <Link href="?type=movie" className="w-full">
+                    Películas
+                  </Link>
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center">
+                <Button
+                  asChild
+                  className={`${type === "tv" ? "text-yellow-500" : ""}`}
+                >
+                  <Link href="?type=tv" className="w-full">
+                    TV
+                  </Link>
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="relative">
+                <div className="hover:bg-slate-600 transition w-full text-center pb-40 px-64">
+                  <Lists />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <div className="hidden md:flex items-center gap-x-6 mr-auto">
           <Link className="hover:text-white/50 transition" href="/">
             Inicio
           </Link>
@@ -50,35 +112,35 @@ const Header = () => {
             Info
           </Link>
         </div>
-        <div className="flex items-center gap-x-6">
+        <div className="hidden md:flex items-center gap-x-6 ">
+          <Lists />
           <Button
             asChild
-            onClick={() => setActive("movie")}
-            className={`${active === "movie" ? "text-yellow-500" : ""}`}
+            className={`${type === "movie" ? "text-yellow-500" : ""}`}
           >
             <Link href="?type=movie">Películas</Link>
           </Button>
           <Button
             asChild
-            onClick={() => setActive("tv")}
-            className={`${active === "tv" ? "text-yellow-500" : ""}`}
+            className={`${type === "tv" ? "text-yellow-500" : ""}`}
           >
             <Link href="?type=tv">TV</Link>
           </Button>
-          <Lists />
-          <Input
-            id="search"
-            name="search"
-            type="search"
-            className="w-64 text-black"
-            placeholder="Buscar..."
-            maxLength={50}
-            minLength={2}
-            onChange={(e) => handleChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
         </div>
       </nav>
+      <div className="px-8 py-2">
+        <Input
+          id="search"
+          name="search"
+          type="search"
+          className="w-full rounded-none border-none bg-black text-white"
+          placeholder="Buscar..."
+          maxLength={50}
+          minLength={2}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
+        />
+      </div>
     </header>
   );
 };
