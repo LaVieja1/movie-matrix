@@ -17,7 +17,7 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
   const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className="mt-10 -mb-10 flex items-center justify-center gap-x-4 flex-wrap">
+    <div className="mt-10 -mb-10 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
       {totalPages > 1 && (
         <>
           {pages.map((page) => {

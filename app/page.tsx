@@ -51,7 +51,7 @@ export default async function Home({ searchParams }: HomeProps) {
         </h1>
         <p className="text-slate-500">{await renderList(list)}</p>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         <Results results={results} type={type} />
       </div>
       <Pages list={list} totalPages={totalPages} type={type} />
