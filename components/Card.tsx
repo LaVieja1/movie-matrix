@@ -17,9 +17,11 @@ const Card = ({ id, image, title, year, rating }: CardProps) => {
   return (
     <div
       onClick={() => router.push(`/${id}`)}
-      className="bg-slate-800 space-y-1 flex flex-col items-center justify-evenly w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer max-h-[400px]"
+      className="bg-slate-800 space-y-1 flex flex-col items-center justify-center w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer max-h-[400px]"
     >
-      <h1 className="text-xl">{title}</h1>
+      <h1 className={`text-xl ${title.length > 20 ? "line-clamp-1" : ""}`}>
+        {title}
+      </h1>
       <div className="w-full px-2 flex justify-center items-center text-sm gap-x-8">
         <p className="text-slate-400">
           {year.toLocaleString("es").slice(0, 4)}
