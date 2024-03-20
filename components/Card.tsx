@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface CardProps {
   id: number;
@@ -13,6 +13,16 @@ interface CardProps {
 
 const Card = ({ id, image, title, year, rating }: CardProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+
+  const handleType = (id: number) => {
+    if (type === "movie") {
+      router.push(`/${id}`);
+    } else if (type === "tv") {
+      return "tv";
+    }
+  };
 
   return (
     <div

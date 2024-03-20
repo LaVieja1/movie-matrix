@@ -49,7 +49,7 @@ async function getRecommendations(id: string) {
   return data;
 }
 
-const Movie = async ({ params }: { params: { id: string } }) => {
+const Movie = async ({ params }: { params: { id: string; type: string } }) => {
   const id = params.id;
   const movie = await getMovie(id);
   const images = await getImages(id);
@@ -61,7 +61,6 @@ const Movie = async ({ params }: { params: { id: string } }) => {
   if (!movie) {
     return <div>No se encontro la pelicula</div>;
   }
-
   return (
     <main className="min-h-screen py-4 px-8 z-10 relative text-white">
       <div
@@ -150,7 +149,7 @@ const Movie = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="mt-24 flex items-center justify-between">
         <div className="mx-auto">
-          <p className="text-3xl pb-4">Imagenes</p>
+          <p className="text-3xl pb-4">Imágenes</p>
           <Carousel className="w-[600px]">
             <CarouselContent>
               {images.backdrops.map((image: any) => (
@@ -197,7 +196,7 @@ const Movie = async ({ params }: { params: { id: string } }) => {
       <div className="my-8 flex flex-col items-center justify-center">
         <h4 className="text-3xl pb-8">Recomendaciones</h4>
         <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {recommendations.results.slice(0, 5).map((movie: any) => (
+          {recommendations.results.slice(0, 10).map((movie: any) => (
             <Card
               key={movie.id}
               id={movie.id}
