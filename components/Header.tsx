@@ -96,7 +96,7 @@ const Header = () => {
                   </Link>
                 </Button>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center pb-44 px-64">
+              <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center pb-44 px-32">
                 <Button>
                   <Lists />
                 </Button>
@@ -104,6 +104,7 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+
         <div className="hidden md:flex items-center gap-x-6 mr-auto">
           <Link className="hover:text-white/50 transition" href="/">
             Inicio
