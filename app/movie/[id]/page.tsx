@@ -73,7 +73,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
         }}
         className="absolute inset-0 -z-10 brightness-[15%] backdrop-blur-sm"
       ></div>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center items-center xl:items-start">
         <h1 className="text-3xl">{movie.title}</h1>
         <p className="text-sm text-slate-400">{movie.original_title}</p>
         <div className="flex items-center">
@@ -81,8 +81,8 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
           <p className="ml-4">{movie.runtime} min</p>
           <p className="ml-4">⭐️ {movie.vote_average.toPrecision(2)} / 10</p>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="relative aspect-[2/3] w-[300px] mt-2">
+        <div className="flex flex-col xl:flex-row items-center justify-between xl:gap-x-32">
+          <div className="relative aspect-[2/3] w-[300px] my-2">
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
@@ -97,7 +97,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
             .map((v: any) => (
               <iframe
                 key={v.key}
-                className="w-[1000px] h-[450px] aspect-video"
+                className="w-[300px] sm:w-[400px] md:w-[700px] xl:w-[1000px] h-[300px] xl:h-[450px] aspect-video"
                 src={`https://www.youtube.com/embed/${v.key}`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -106,7 +106,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
             ))}
         </div>
       </div>
-      <div className="mt-4 flex flex-col justify-center w-[60%]">
+      <div className="mt-4 flex flex-col justify-center w-full xl:w-[60%] items-center xl:items-start">
         <div className="flex items-center gap-x-4 py-2">
           {genres.map((genre: string) => (
             <p key={genre} className="border px-2 py-1 rounded-md text-sm">
@@ -147,10 +147,10 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
           </p>
         </div>
       </div>
-      <div className="mt-24 flex items-center justify-between">
-        <div className="mx-auto">
+      <div className="mt-24 flex flex-col xl:flex-row items-center justify-between">
+        <div className="mx-auto mb-2 xl:mb-0">
           <p className="text-3xl pb-4">Imágenes</p>
-          <Carousel className="w-[600px]">
+          <Carousel className="w-[300px] xl:w-[600px]">
             <CarouselContent>
               {images.backdrops.map((image: any) => (
                 <CarouselItem key={image.file_path}>
@@ -165,21 +165,20 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-black" />
-            <CarouselNext className="bg-black" />
+            <CarouselPrevious className="bg-black hidden md:block" />
+            <CarouselNext className="bg-black hidden md:block" />
           </Carousel>
         </div>
         <div className="mx-auto">
           <p className="text-3xl pb-4">Videos</p>
-          <Carousel className="w-[600px]">
+          <Carousel className="w-[250px] xl:w-[600px]">
             <CarouselContent>
               {videos.results
                 .filter((video: any) => video.type === "Trailer")
                 .map((video: any) => (
                   <CarouselItem key={video.key}>
                     <iframe
-                      width={"100%"}
-                      height="340px"
+                      className="w-[250px] sm:w-[400px] md:w-[700px] xl:w-full h-[300px] xl:h-[450px] aspect-video"
                       src={`https://www.youtube.com/embed/${video.key}`}
                       title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
