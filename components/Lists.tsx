@@ -10,7 +10,7 @@ import {
 
 const Lists = () => {
   const searchParams = useSearchParams();
-  const type = searchParams.get("type");
+  const type = searchParams.get("type") || "movie";
 
   return (
     <NavigationMenu>
@@ -22,17 +22,29 @@ const Lists = () => {
           <NavigationMenuContent className="flex flex-col items-start gap-y-2 text-sm px-8 py-4">
             {type === "movie" ? (
               <>
-                <ListItem title="Populares" param="popular" />
-                <ListItem title="Mejor puntación" param="top_rated" />
-                <ListItem title="En cartelera" param="now_playing" />
-                <ListItem title="Proximamente" param="upcoming" />
+                <ListItem type="movie" title="Populares" param="popular" />
+                <ListItem
+                  type="movie"
+                  title="Mejor puntación"
+                  param="top_rated"
+                />
+                <ListItem
+                  type="movie"
+                  title="En cartelera"
+                  param="now_playing"
+                />
+                <ListItem type="movie" title="Proximamente" param="upcoming" />
               </>
             ) : (
               <>
-                <ListItem title="Populares" param="popular" />
-                <ListItem title="Mejor puntación" param="top_rated" />
-                <ListItem title="En el aire" param="on_the_air" />
-                <ListItem title="Nuevo capitulo" param="airing_today" />
+                <ListItem type="tv" title="Populares" param="popular" />
+                <ListItem type="tv" title="Mejor puntación" param="top_rated" />
+                <ListItem type="tv" title="En el aire" param="on_the_air" />
+                <ListItem
+                  type="tv"
+                  title="Nuevo capitulo"
+                  param="airing_today"
+                />
               </>
             )}
           </NavigationMenuContent>

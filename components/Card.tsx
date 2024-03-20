@@ -14,19 +14,19 @@ interface CardProps {
 const Card = ({ id, image, title, year, rating }: CardProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const type = searchParams.get("type");
+  const type = searchParams.get("type") || "movie";
 
   const handleType = (id: number) => {
     if (type === "movie") {
-      router.push(`/${id}`);
+      router.push(`/movie/${id}`);
     } else if (type === "tv") {
-      return "tv";
+      router.push(`/tv/${id}`);
     }
   };
 
   return (
     <div
-      onClick={() => router.push(`/${id}`)}
+      onClick={() => handleType(id)}
       className="bg-slate-800 space-y-1 flex flex-col items-center justify-center w-full p-2 text-white rounded-md text-center hover:opacity-90 transition cursor-pointer max-h-[400px]"
     >
       <h1 className={`text-xl ${title.length > 20 ? "line-clamp-1" : ""}`}>
