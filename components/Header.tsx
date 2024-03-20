@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className="bg-slate-800 w-full">
-      <nav className="flex items-center justify-between p-4 text-white text-xl">
+      <nav className="flex items-center justify-between py-4 px-8 text-white text-xl">
         <Image
           src="/logo.svg"
           alt="logo"
