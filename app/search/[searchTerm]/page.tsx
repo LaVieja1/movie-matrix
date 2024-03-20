@@ -20,7 +20,9 @@ const searchPage = async ({ params }: { params: { searchTerm: string } }) => {
   return (
     <main className="min-h-screen py-4 px-8">
       <div className="flex flex-col justify-center mb-4">
-        <h1 className="text-3xl font-bold">Resultados: {params.searchTerm}</h1>
+        <h1 className="text-3xl font-bold">
+          Resultados: {params.searchTerm.replace(/%20/g, " ")}
+        </h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {results.map((result: any) => (
