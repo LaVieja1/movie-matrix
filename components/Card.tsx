@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface CardProps {
   id: number;
@@ -13,13 +13,21 @@ interface CardProps {
 
 const Card = ({ id, image, title, year, rating }: CardProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const type = searchParams.get("type") || "movie";
+  const type = searchParams?.get("type") || "movie";
+  const typePath = pathname?.split("/")[1];
+  console.log(type);
 
   const handleType = (id: number) => {
-    if (type === "movie") {
+    if (typePath === "" && type === "movie") {
       router.push(`/movie/${id}`);
-    } else if (type === "tv") {
+    } else if (typePath === "" && type === "tv") {
+      router.push(`/tv/${id}`);
+    }
+    if (typePath === "movie") {
+      router.push(`/movie/${id}`);
+    } else if (typePath === "tv") {
       router.push(`/tv/${id}`);
     }
   };
