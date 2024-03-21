@@ -81,8 +81,18 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
           <p>
             {tv.first_air_date.slice(0, 4)} - {tv.last_air_date.slice(0, 4)}
           </p>
-          <p className="ml-4">{tv.episode_run_time} min</p>
+          <p className="ml-4">
+            {tv.episode_run_time.length > 0 ? `${tv.episode_run_time} min` : ""}
+          </p>
           <p className="ml-4">⭐️ {tv.vote_average.toPrecision(2)} / 10</p>
+        </div>
+        <div className="flex items-center">
+          <p>
+            {tv.number_of_seasons > 1
+              ? `${tv.number_of_seasons} temporadas`
+              : `${tv.number_of_seasons} temporada`}
+          </p>
+          <p className="ml-4">{tv.networks[0].name}</p>
         </div>
         <div className="flex flex-col xl:flex-row items-center justify-between xl:gap-x-32">
           <div className="relative aspect-[2/3] w-[300px] my-2">
