@@ -19,8 +19,8 @@ import {
 import Lists from "./Lists";
 
 const Header = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const type = searchParams.get("type") || "movie";
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -97,14 +97,13 @@ const Header = () => {
                 </Button>
               </DropdownMenuItem>
               <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center pb-44 px-32">
-                <Button>
+                <div className="inline-flex items-center justify-center whitespace-nowrap bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm font-medium h-10 px-4 py-2">
                   <Lists />
-                </Button>
+                </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-
         <div className="hidden md:flex items-center gap-x-6 mr-auto">
           <Link className="hover:text-white/50 transition" href="/">
             Inicio
@@ -114,9 +113,9 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden md:flex items-center gap-x-6 ">
-          <Button>
+          <div className="inline-flex items-center justify-center whitespace-nowrap bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm font-medium h-10 px-4 py-2">
             <Lists />
-          </Button>
+          </div>
           <Button
             asChild
             className={`${type === "movie" ? "text-yellow-500" : ""}`}
