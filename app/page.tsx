@@ -2,7 +2,7 @@ import Card from "@/components/Card";
 import Pages from "@/components/Pages";
 import Results from "@/components/Results";
 
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
 interface HomeProps {
   searchParams: { type: string; list: string; page: number };
