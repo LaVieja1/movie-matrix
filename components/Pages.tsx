@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "./ui/button";
+import { Suspense } from "react";
 
 interface PagesProps {
   list: string;
@@ -17,30 +18,32 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
   const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className="mt-10 -mb-10 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
-      {totalPages > 1 && (
-        <>
-          {pages.map((page) => {
-            return (
-              <Button key={page} asChild>
-                <Link
-                  className={`hover:text-yellow-500 transition text-xl max-w-12 ${
-                    activePage === page.toString() ? "text-yellow-500" : ""
-                  }`}
-                  href={
-                    type === "movie"
-                      ? `/?type=movie&list=${list}&page=${page}`
-                      : `/?type=tv&list=${list}&page=${page}`
-                  }
-                >
-                  {page}
-                </Link>
-              </Button>
-            );
-          })}
-        </>
-      )}
-    </div>
+    <Suspense>
+      <div className="mt-10 -mb-10 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
+        {totalPages > 1 && (
+          <>
+            {pages.map((page) => {
+              return (
+                <Button key={page} asChild>
+                  <Link
+                    className={`hover:text-yellow-500 transition text-xl max-w-12 ${
+                      activePage === page.toString() ? "text-yellow-500" : ""
+                    }`}
+                    href={
+                      type === "movie"
+                        ? `/?type=movie&list=${list}&page=${page}`
+                        : `/?type=tv&list=${list}&page=${page}`
+                    }
+                  >
+                    {page}
+                  </Link>
+                </Button>
+              );
+            })}
+          </>
+        )}
+      </div>
+    </Suspense>
   );
 };
 
