@@ -45,15 +45,19 @@ const Header = () => {
     <Suspense>
       <header className="bg-slate-800 w-full">
         <nav className="flex items-center justify-between py-2 px-8 text-white text-xl">
-          <Image
-            src="/logo.svg"
-            alt="logo"
-            width={50}
-            height={50}
-            className="mr-2 md:mr-4 w-8 md:w-auto h-auto cursor-pointer"
-            priority
-            onClick={() => router.push("/")}
-          />
+          <Link href="/" className="flex items-center">
+            <h1 className="w-16 mr-2 hidden md:block text-sm md:text-xl font-bold text-[#28ccac]">
+              Movie Matrix
+            </h1>
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              width={50}
+              height={50}
+              className="mr-2 md:mr-4 w-8 md:w-auto h-auto"
+              priority
+            />
+          </Link>
           <div className="md:hidden flex items-center justify-center">
             <div className="px-2 md:px-8 py-2 w-full">
               <Input
@@ -127,7 +131,7 @@ const Header = () => {
               Info
             </Link>
           </div>
-          <div className="hidden md:flex px-8 py-2 mr-auto w-[40%]">
+          <div className="hidden md:flex px-8 py-2 mr-auto w-[50%]">
             <Input
               id="search"
               name="search"
