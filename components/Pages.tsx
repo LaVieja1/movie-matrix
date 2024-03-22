@@ -28,6 +28,10 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
   const [pages, setPages] = useState([1, 2, 3, 4, 5]);
 
   useEffect(() => {
+    if (list) {
+      setPages([1, 2, 3, 4, 5]);
+    }
+
     if (activePage === "1") {
       setPages([1, 2, 3, 4, 5]);
     }
@@ -71,7 +75,7 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
         parseInt(activePage),
       ]);
     }
-  }, [activePage]);
+  }, [activePage, list]);
 
   const maxLength = 50;
   const length = Math.min(totalPages, maxLength);
@@ -98,34 +102,6 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
   };
 
   return (
-    /*
-    <Suspense>
-      <div className="mt-10 mb-2 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
-        {totalPages > 1 && (
-          <>
-            {pages.map((page) => {
-              return (
-                <Button className="border rounded-none" key={page} asChild>
-                  <Link
-                    className={`hover:text-yellow-500 transition text-xl max-w-10 ${
-                      activePage === page.toString() ? "text-yellow-500" : ""
-                    }`}
-                    href={
-                      type === "movie"
-                        ? `/?type=movie&list=${list}&page=${page}`
-                        : `/?type=tv&list=${list}&page=${page}`
-                    }
-                  >
-                    {page}
-                  </Link>
-                </Button>
-              );
-            })}
-          </>
-        )}
-      </div>
-    </Suspense>
-          */
     <Suspense>
       <Pagination className="mt-10 mb-2 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
         <PaginationContent>
