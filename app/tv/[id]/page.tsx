@@ -185,14 +185,14 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
         {videos.results && videos.results.length > 0 && (
           <div className="mx-auto">
             <p className="text-3xl pb-4">Videos</p>
-            <Carousel className="w-[250px] xl:w-[600px]">
+            <Carousel className="w-[250px] lg:w-[600px]">
               <CarouselContent>
                 {videos.results
                   .filter((video: any) => video.type === "Trailer")
                   .map((video: any) => (
                     <CarouselItem key={video.key}>
                       <iframe
-                        className="w-[250px] sm:w-[400px] md:w-[700px] xl:w-full h-[300px] xl:h-[450px] aspect-video"
+                        className="w-[250px] sm:w-[400px] md:w-[700px] xl:w-full h-[300px] xl:h-full aspect-video"
                         src={`https://www.youtube.com/embed/${video.key}`}
                         title="YouTube video player"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
