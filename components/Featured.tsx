@@ -20,7 +20,7 @@ interface FeaturedProps {
 }
 
 const Featured = ({ results, mediaType }: FeaturedProps) => {
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
 
   const router = useRouter();
 
@@ -29,7 +29,7 @@ const Featured = ({ results, mediaType }: FeaturedProps) => {
       <div className="w-full py-4">
         <Carousel
           plugins={[plugin.current]}
-          className="w-full cursor-pointer relative"
+          className="w-full cursor-pointer relative "
           onMouseEnter={plugin.current.stop}
           onMouseLeave={plugin.current.reset}
         >

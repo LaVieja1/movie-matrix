@@ -23,7 +23,7 @@ const FeaturedCard = ({ image, title, year, rating }: FeaturedCardProps) => {
           />
           <div className="flex flex-col items-center justify-center gap-y-2 text-center absolute top-0 left-0 right-0 bottom-0">
             <h1 className="text-xl md:text-6xl">{title}</h1>
-            <div className="flex items-center justify-center gap-x-8 text-xl md:text-4xl">
+            <div className="flex items-center justify-center gap-x-8 text-xl md:text-2xl">
               <p className="text-slate-400">
                 {year.toLocaleString("es").slice(0, 4)}
               </p>

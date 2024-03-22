@@ -165,8 +165,8 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-black hidden md:block" />
-            <CarouselNext className="bg-black hidden md:block" />
+            <CarouselPrevious className="bg-black hidden md:flex" />
+            <CarouselNext className="bg-black hidden md:flex" />
           </Carousel>
         </div>
         <div className="mx-auto">
