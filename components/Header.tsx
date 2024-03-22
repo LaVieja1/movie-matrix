@@ -45,7 +45,7 @@ const Header = () => {
     <Suspense>
       <header className="bg-slate-800 w-full">
         <nav className="flex items-center justify-between py-2 px-8 text-white text-xl">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center mr-4">
             <h1 className="w-16 mr-2 hidden md:block text-sm md:text-xl font-bold text-[#28ccac]">
               Movie Matrix
             </h1>
@@ -79,14 +79,6 @@ const Header = () => {
               <DropdownMenuContent className="bg-slate-800 text-white flex flex-col items-center w-full px-4">
                 <DropdownMenuLabel>Menu</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center">
-                  <Link
-                    className="hover:text-white/50 transition w-full"
-                    href="/"
-                  >
-                    Inicio
-                  </Link>
-                </DropdownMenuItem>
                 <DropdownMenuItem className="hover:bg-slate-600 transition w-full text-center">
                   <Link
                     className="hover:text-white/50 transition w-full"
@@ -124,9 +116,6 @@ const Header = () => {
             </DropdownMenu>
           </div>
           <div className="hidden md:flex items-center gap-x-6 mr-auto">
-            <Link className="hover:text-white/50 transition" href="/">
-              Inicio
-            </Link>
             <Link className="hover:text-white/50 transition" href="/info">
               Info
             </Link>
