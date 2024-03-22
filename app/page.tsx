@@ -1,4 +1,4 @@
-import Card from "@/components/Card";
+import Featured from "@/components/Featured";
 import Pages from "@/components/Pages";
 import Results from "@/components/Results";
 
@@ -46,8 +46,9 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <main className="min-h-screen py-4 px-8">
       <div className="flex flex-col justify-center mb-4">
+        <Featured results={results} mediaType={type} />
         <h1 className="text-3xl font-bold">
-          {type === "movie" ? "Peliculas" : "Series"}
+          {type === "movie" ? "Películas" : "Series"}
         </h1>
         <p className="text-slate-500">{await renderList(list)}</p>
       </div>

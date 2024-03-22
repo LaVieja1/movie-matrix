@@ -127,8 +127,12 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
             </p>
           ))}
         </div>
-        <p className={`mt-4 ${tv.overview.length > 300 ? "line-clamp-3" : ""}`}>
-          {tv.overview}
+        <p
+          className={`overview mt-4 ${
+            tv.overview.length > 300 ? "line-clamp-3" : ""
+          }`}
+        >
+          {tv.overview.split(".")[0] + "." + tv.overview.split(".")[1] + "."}
         </p>
         <div className="flex flex-col justify-center">
           <p className="border-t border-gray-600 py-2">
@@ -155,49 +159,53 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
         </div>
       </div>
       <div className="mt-24 flex flex-col xl:flex-row items-center justify-between">
-        <div className="mx-auto mb-2 xl:mb-0">
-          <p className="text-3xl pb-4">Imágenes</p>
-          <Carousel className="w-[300px] xl:w-[600px]">
-            <CarouselContent>
-              {images.backdrops.map((image: any) => (
-                <CarouselItem key={image.file_path}>
-                  <div className="relative aspect-video w-full">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
-                      alt={tv.name}
-                      fill
-                      sizes="(100vw - 2rem) 100vh"
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="bg-black hidden md:block" />
-            <CarouselNext className="bg-black hidden md:block" />
-          </Carousel>
-        </div>
-        <div className="mx-auto">
-          <p className="text-3xl pb-4">Videos</p>
-          <Carousel className="w-[250px] xl:w-[600px]">
-            <CarouselContent>
-              {videos.results
-                .filter((video: any) => video.type === "Trailer")
-                .map((video: any) => (
-                  <CarouselItem key={video.key}>
-                    <iframe
-                      className="w-[250px] sm:w-[400px] md:w-[700px] xl:w-full h-[300px] xl:h-[450px] aspect-video"
-                      src={`https://www.youtube.com/embed/${video.key}`}
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    ></iframe>
+        {images.backdrops && images.backdrops.length > 0 && (
+          <div className="mx-auto mb-2 xl:mb-0">
+            <p className="text-3xl pb-4">Imágenes</p>
+            <Carousel className="w-[250px] xl:w-[600px]">
+              <CarouselContent>
+                {images.backdrops.map((image: any) => (
+                  <CarouselItem key={image.file_path}>
+                    <div className="relative aspect-video w-full">
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
+                        alt={tv.name}
+                        fill
+                        sizes="(100vw - 2rem) 100vh"
+                      />
+                    </div>
                   </CarouselItem>
                 ))}
-            </CarouselContent>
-            <CarouselPrevious className="bg-black" />
-            <CarouselNext className="bg-black" />
-          </Carousel>
-        </div>
+              </CarouselContent>
+              <CarouselPrevious className="bg-black" />
+              <CarouselNext className="bg-black" />
+            </Carousel>
+          </div>
+        )}
+        {videos.results && videos.results.length > 0 && (
+          <div className="mx-auto">
+            <p className="text-3xl pb-4">Videos</p>
+            <Carousel className="w-[250px] xl:w-[600px]">
+              <CarouselContent>
+                {videos.results
+                  .filter((video: any) => video.type === "Trailer")
+                  .map((video: any) => (
+                    <CarouselItem key={video.key}>
+                      <iframe
+                        className="w-[250px] sm:w-[400px] md:w-[700px] xl:w-full h-[300px] xl:h-[450px] aspect-video"
+                        src={`https://www.youtube.com/embed/${video.key}`}
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      ></iframe>
+                    </CarouselItem>
+                  ))}
+              </CarouselContent>
+              <CarouselPrevious className="bg-black" />
+              <CarouselNext className="bg-black" />
+            </Carousel>
+          </div>
+        )}
       </div>
       <div className="my-8 flex flex-col items-center justify-center">
         <h4 className="text-3xl pb-8">Recomendaciones</h4>
