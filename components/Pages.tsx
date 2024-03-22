@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-
-import { Button } from "./ui/button";
 import { Suspense, use, useEffect, useState } from "react";
+
 import {
   Pagination,
   PaginationContent,
@@ -103,14 +101,16 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
 
   return (
     <Suspense>
-      <Pagination className="mt-10 mb-2 grid grid-cols-3 items-center justify-center justify-items-center gap-x-4 md:flex">
+      <Pagination className="mt-10 mb-2 items-center justify-center flex">
         <PaginationContent>
           {totalPages > 1 && (
             <>
               <PaginationItem className="hover:opacity-50">
                 <PaginationPrevious
                   onClick={() => handlePages(Number(activePage) - 1)}
-                  className={`${pages[0] === 1 ? "hidden" : "flex"}`}
+                  className={`${
+                    pages[0] === 1 ? "hidden" : "flex"
+                  } hidden md:flex`}
                   href={`/?type=${type}&list=${list}&page=${
                     Number(activePage) - 1
                   }`}
@@ -150,7 +150,9 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
               <PaginationItem className="hover:opacity-50">
                 <PaginationNext
                   onClick={() => handlePages(Number(activePage) + 1)}
-                  className={`${pages.includes(50) ? "hidden" : "flex"}`}
+                  className={`${
+                    pages.includes(50) ? "hidden" : "flex"
+                  } hidden md:flex`}
                   href={`/?type=${type}&list=${list}&page=${
                     Number(activePage) + 1
                   }`}
