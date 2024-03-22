@@ -207,21 +207,23 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
           </div>
         )}
       </div>
-      <div className="my-8 flex flex-col items-center justify-center">
-        <h4 className="text-3xl pb-8">Recomendaciones</h4>
-        <div className="grid items-center justify-center grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {recommendations.results.slice(0, 10).map((tv: any) => (
-            <Card
-              key={tv.id}
-              id={tv.id}
-              image={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
-              title={tv.name}
-              year={tv.first_air_date}
-              rating={tv.vote_average}
-            />
-          ))}
+      {recommendations.results && recommendations.results.length > 0 && (
+        <div className="my-8 flex flex-col items-center justify-center">
+          <h4 className="text-3xl pb-8">Recomendaciones</h4>
+          <div className="grid items-center justify-center grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {recommendations.results.slice(0, 10).map((tv: any) => (
+              <Card
+                key={tv.id}
+                id={tv.id}
+                image={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
+                title={tv.name}
+                year={tv.first_air_date}
+                rating={tv.vote_average}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 };

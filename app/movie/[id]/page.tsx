@@ -200,21 +200,23 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
           </div>
         )}
       </div>
-      <div className="my-8 flex flex-col items-center justify-center">
-        <h4 className="text-3xl pb-8">Recomendaciones</h4>
-        <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {recommendations.results.slice(0, 10).map((movie: any) => (
-            <Card
-              key={movie.id}
-              id={movie.id}
-              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              title={movie.title}
-              year={movie.release_date}
-              rating={movie.vote_average}
-            />
-          ))}
+      {recommendations.results && recommendations.results.length > 0 && (
+        <div className="my-8 flex flex-col items-center justify-center">
+          <h4 className="text-3xl pb-8">Recomendaciones</h4>
+          <div className="grid items-center justify-center grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            {recommendations.results.slice(0, 10).map((movie: any) => (
+              <Card
+                key={movie.id}
+                id={movie.id}
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                title={movie.title}
+                year={movie.release_date}
+                rating={movie.vote_average}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 };
