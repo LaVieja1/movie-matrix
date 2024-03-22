@@ -105,12 +105,10 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
         <PaginationContent>
           {totalPages > 1 && (
             <>
-              <PaginationItem className="hover:opacity-50">
+              <PaginationItem className="hover:opacity-50 hidden md:flex">
                 <PaginationPrevious
                   onClick={() => handlePages(Number(activePage) - 1)}
-                  className={`${
-                    pages[0] === 1 ? "hidden" : "flex"
-                  } hidden md:flex`}
+                  className={`${pages[0] === 1 ? "hidden" : "flex"}`}
                   href={`/?type=${type}&list=${list}&page=${
                     Number(activePage) - 1
                   }`}
@@ -147,12 +145,10 @@ const Pages = ({ list, totalPages, type }: PagesProps) => {
                   onClick={() => handleLastPage()}
                 />
               </PaginationItem>
-              <PaginationItem className="hover:opacity-50">
+              <PaginationItem className="hover:opacity-50 hidden md:flex">
                 <PaginationNext
                   onClick={() => handlePages(Number(activePage) + 1)}
-                  className={`${
-                    pages.includes(50) ? "hidden" : "flex"
-                  } hidden md:flex`}
+                  className={`${pages.includes(50) ? "hidden" : "flex"}`}
                   href={`/?type=${type}&list=${list}&page=${
                     Number(activePage) + 1
                   }`}
