@@ -50,11 +50,24 @@ const Header = () => {
             alt="logo"
             width={50}
             height={50}
-            className="mr-4 w-auto h-auto cursor-pointer"
+            className="mr-2 md:mr-4 w-8 md:w-auto h-auto cursor-pointer"
             priority
             onClick={() => router.push("/")}
           />
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center justify-center">
+            <div className="px-2 md:px-8 py-2 w-full">
+              <Input
+                id="search"
+                name="search"
+                type="search"
+                className="w-full rounded-none border-none bg-black text-white text-xs"
+                placeholder="Buscar..."
+                maxLength={50}
+                minLength={2}
+                onChange={(e) => handleChange(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
+              />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Menu />
@@ -114,6 +127,19 @@ const Header = () => {
               Info
             </Link>
           </div>
+          <div className="hidden md:flex px-8 py-2 mr-auto w-[40%]">
+            <Input
+              id="search"
+              name="search"
+              type="search"
+              className="w-full rounded-none border-none bg-black text-white"
+              placeholder="Buscar..."
+              maxLength={50}
+              minLength={2}
+              onChange={(e) => handleChange(e)}
+              onKeyDown={(e) => handleKeyDown(e)}
+            />
+          </div>
           <div className="hidden md:flex items-center gap-x-6 ">
             <div className="inline-flex items-center justify-center whitespace-nowrap bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm font-medium h-10 px-4 py-2">
               <Lists />
@@ -132,19 +158,6 @@ const Header = () => {
             </Button>
           </div>
         </nav>
-        <div className="px-8 py-2">
-          <Input
-            id="search"
-            name="search"
-            type="search"
-            className="w-full rounded-none border-none bg-black text-white"
-            placeholder="Buscar..."
-            maxLength={50}
-            minLength={2}
-            onChange={(e) => handleChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-        </div>
       </header>
     </Suspense>
   );
