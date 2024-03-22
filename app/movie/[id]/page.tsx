@@ -63,7 +63,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
   }
 
   return (
-    <main className="min-h-screen py-4 px-8 z-10 relative text-white">
+    <main className="min-h-screen py-4 px-8 z-10 relative text-white overflow-x-hidden">
       <div
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -108,7 +108,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
         </div>
       </div>
       <div className="mt-4 flex flex-col justify-center w-full xl:w-[60%] items-center xl:items-start">
-        <div className="flex items-center gap-x-4 py-2">
+        <div className="flex items-center gap-x-4 gap-y-2 py-2 flex-wrap">
           {genres.map((genre: string) => (
             <p key={genre} className="border px-2 py-1 rounded-md text-sm">
               {genre}

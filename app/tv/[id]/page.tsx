@@ -63,7 +63,7 @@ const Movie = async ({ params }: { params: { id: string; type: string } }) => {
   }
 
   return (
-    <main className="min-h-screen py-4 px-8 z-10 relative text-white">
+    <main className="min-h-screen py-4 px-8 z-10 relative text-white overflow-x-hidden">
       <div
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.8)",
