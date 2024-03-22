@@ -44,7 +44,7 @@ export default async function Home({ searchParams }: HomeProps) {
   }
 
   return (
-    <main className="min-h-screen py-4 px-8">
+    <main className="min-h-screen py-4 px-8 overflow-x-hidden">
       <div className="flex flex-col justify-center mb-4">
         <Featured results={results} mediaType={type} />
         <h1 className="text-3xl font-bold">
