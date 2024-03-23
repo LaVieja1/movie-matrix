@@ -3,6 +3,7 @@
 import { Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
 
 import {
   Carousel,
@@ -26,7 +27,19 @@ const Featured = ({ results, mediaType }: FeaturedProps) => {
 
   return (
     <Suspense>
-      <div className="w-full py-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 1,
+            delay: 0.5,
+            ease: "easeInOut",
+            type: "tween",
+          },
+        }}
+        className="w-full py-4"
+      >
         <Carousel
           plugins={[plugin.current]}
           className="w-full cursor-pointer relative "
@@ -55,7 +68,7 @@ const Featured = ({ results, mediaType }: FeaturedProps) => {
           <CarouselPrevious className="hidden md:flex absolute top-[50%] left-6 bg-transparent" />
           <CarouselNext className="hidden md:flex absolute top-[50%] right-6 bg-transparent" />
         </Carousel>
-      </div>
+      </motion.div>
     </Suspense>
   );
 };
