@@ -1,6 +1,7 @@
 "use client";
 
 import Card from "./Card";
+import { motion } from "framer-motion";
 
 interface ResultsProps {
   results: [];
@@ -13,14 +14,24 @@ const Results = ({ results, type }: ResultsProps) => {
       {type === "movie" ? (
         <>
           {results.map((movie: any) => (
-            <Card
-              id={movie.id}
+            <motion.div
               key={movie.id}
-              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              title={movie.title}
-              year={movie.release_date}
-              rating={movie.vote_average}
-            />
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeInOut", type: "tween" },
+              }}
+              layoutScroll={true}
+              initial={{ opacity: 0 }}
+            >
+              <Card
+                id={movie.id}
+                key={movie.id}
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                title={movie.title}
+                year={movie.release_date}
+                rating={movie.vote_average}
+              />
+            </motion.div>
           ))}
         </>
       ) : (
