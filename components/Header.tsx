@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -43,7 +44,11 @@ const Header = () => {
 
   return (
     <Suspense>
-      <header className="bg-slate-800 w-full">
+      <motion.header
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.5 } }}
+        className="bg-slate-800 w-full"
+      >
         <nav className="flex items-center justify-between py-2 px-8 text-white text-xl">
           <Link href="/" className="flex items-center mr-4">
             <h1 className="w-16 mr-2 hidden md:block text-sm md:text-xl font-bold text-[#28ccac]">
@@ -151,7 +156,7 @@ const Header = () => {
             </Button>
           </div>
         </nav>
-      </header>
+      </motion.header>
     </Suspense>
   );
 };
