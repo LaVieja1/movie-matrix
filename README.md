@@ -17,4 +17,4 @@ Hogar de películas y series.
 
 ## API
 
-https://developer.themoviedb.org/
+https://developer.themoviedb.org
