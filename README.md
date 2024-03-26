@@ -14,6 +14,7 @@ Hogar de películas y series.
 - TypeScript
 - ShadCn
 - TailwindCSS
+- Framer Motion
 
 ## API
 
