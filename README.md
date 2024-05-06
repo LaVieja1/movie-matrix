@@ -13,7 +13,8 @@ Hogar de películas y series.
 - TypeScript
 - ShadCn
 - TailwindCSS
+- Framer Motion
 
 ## API
 
-https://developer.themoviedb.org/
+https://developer.themoviedb.org
